@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --crt-green: #33ff33;
+    --crt-green-glow: rgba(51, 255, 51, 0.45);
+    --crt-green-dim: rgba(51, 255, 51, 0.2);
+    --crt-green-bg: #091309;
+
+    --crt-amber: #ffb000;
+    --crt-amber-glow: rgba(255, 176, 0, 0.45);
+    --crt-amber-dim: rgba(255, 176, 0, 0.2);
+    --crt-amber-bg: #140e04;
+
+    --crt-cyan: #00f3ff;
+    --crt-cyan-glow: rgba(0, 243, 255, 0.45);
+    --crt-cyan-dim: rgba(0, 243, 255, 0.2);
+    --crt-cyan-bg: #041014;
+
+    --crt-white: #e6e6e6;
+    --crt-white-glow: rgba(230, 230, 230, 0.4);
+    --crt-white-dim: rgba(230, 230, 230, 0.2);
+    --crt-white-bg: #101012;
+
+    /* Active theme pointers */
+    --p-color: var(--crt-green);
+    --p-glow: var(--crt-green-glow);
+    --p-dim: var(--crt-green-dim);
+    --p-bg: var(--crt-green-bg);
+  }
+
+  body[data-theme="green"] {
+    --p-color: var(--crt-green);
+    --p-glow: var(--crt-green-glow);
+    --p-dim: var(--crt-green-dim);
+    --p-bg: var(--crt-green-bg);
+  }
+
+  body[data-theme="amber"] {
+    --p-color: var(--crt-amber);
+    --p-glow: var(--crt-amber-glow);
+    --p-dim: var(--crt-amber-dim);
+    --p-bg: var(--crt-amber-bg);
+  }
+
+  body[data-theme="cyan"] {
+    --p-color: var(--crt-cyan);
+    --p-glow: var(--crt-cyan-glow);
+    --p-dim: var(--crt-cyan-dim);
+    --p-bg: var(--crt-cyan-bg);
+  }
+
+  body[data-theme="white"] {
+    --p-color: var(--crt-white);
+    --p-glow: var(--crt-white-glow);
+    --p-dim: var(--crt-white-dim);
+    --p-bg: var(--crt-white-bg);
+  }
+
+  body {
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+    background-color: #0c0d11;
+    color: var(--p-color);
+  }
+}
+
+/* CRT Screen Scanline Overlay - lightweight CPU-friendly raster */
+.crt-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0px,
+    rgba(0, 0, 0, 0.25) 1.5px,
+    transparent 1.5px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* CRT Curved Glass Vignette */
+.crt-vignette {
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.85), inset 0 0 15px rgba(0, 0, 0, 0.95);
+  pointer-events: none;
+}
+
+/* Subtle Phosphor Text Glow */
+.text-phosphor {
+  color: var(--p-color);
+  text-shadow: 0 0 5px var(--p-glow), 0 0 10px var(--p-glow);
+}
+
+.text-phosphor-bright {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--p-color), 0 0 14px var(--p-glow);
+}
+
+.border-phosphor {
+  border-color: var(--p-color);
+  box-shadow: 0 0 8px var(--p-dim), inset 0 0 8px var(--p-dim);
+}
+
+.border-phosphor-subtle {
+  border-color: var(--p-dim);
+}
+
+/* Screen flicker animation */
+@keyframes crtFlicker {
+  0% { opacity: 0.99; }
+  50% { opacity: 1; }
+  52% { opacity: 0.97; }
+  54% { opacity: 1; }
+  80% { opacity: 0.985; }
+  100% { opacity: 1; }
+}
+
+.crt-flicker {
+  animation: crtFlicker 0.15s infinite;
+}
+
+/* Blinking terminal cursor */
+@keyframes crtBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.crt-cursor {
+  animation: crtBlink 1s infinite steps(1);
+}
+
+/* Custom scrollbars matching retro phosphor theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--p-color);
+  opacity: 0.4;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--p-color);
+}

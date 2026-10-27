@@ -1,0 +1,6 @@
+{
+  "name": "Menahil Dastgir — Retro CRT Workstation Portfolio",
+  "description": "Full-stack retro computer and CRT monitor portfolio for Menahil Dastgir featuring project showcase, interactive skills matrix, terminal emulator, audio synthesizer sound effects, and contact messaging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
